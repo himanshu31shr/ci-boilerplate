@@ -1,0 +1,56 @@
+{
+  "name": "ci-boilerplate",
+  "version": "1.0.0",
+  "description": "A kickstart boilerplate.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/himanshu31shr/ci-boilerplate.git"
+  },
+  "keywords": [
+    "ci",
+    "ci",
+    "boilerplate",
+    "boilerplate"
+  ],
+  "author": "Himanshu Shrivastava",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/himanshu31shr/ci-boilerplate/issues"
+  },
+  "homepage": "https://github.com/himanshu31shr/ci-boilerplate#readme",
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "datatables.net": "^1.10.16",
+    "datatables.net-dt": "^1.10.16",
+    "grunt": "~0.4.1",
+    "jquery": "3.2.1",
+    "parsleyjs": "^2.8.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-usemin": "~2.0.2",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-rev": "~0.1.0",
+    "grunt-contrib-clean": "~0.5.0",
+    "chart.js": "2.7.1",
+    "flag-icon-css": "2.9.0",
+    "font-awesome": "4.7.0",
+    "pace-progress": "1.0.2",
+    "popper.js": "1.12.9",
+    "simple-line-icons": "2.4.1"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-usemin": "~2.0.2",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-rev": "~0.1.0",
+    "grunt-contrib-clean": "~0.5.0"
+  }
+}
