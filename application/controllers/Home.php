@@ -1,6 +1,5 @@
 <?php
-class Home extends GuestController
-{
+class Home extends GuestController {
 	
 	public function __construct()
 	{
@@ -8,6 +7,7 @@ class Home extends GuestController
 	}
 
 	public function index(){
-		echo 'index';
+		$this->load->model('Test');
+		echo $this->twig->display('backend/dashboard');	
 	}
 }

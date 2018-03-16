@@ -9,6 +9,7 @@ class Admin extends AdminController
 	}
 
 	public function index(){
+		$this->load->model('Test');
 		$this->setBreadCrumbs([
 				'home' => '', 
 				'test' => 'test'
