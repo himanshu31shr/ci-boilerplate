@@ -20,4 +20,9 @@ class Admin extends AdminController
 			])
 			->twig->display('backend/dashboard');
 	}
+
+	public function test(){
+		$data = ['modal' => $this->twig->render('backend/modals/test'), 'status' => true];
+		echo json_encode($data);
+	}
 }

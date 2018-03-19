@@ -22,8 +22,10 @@
 
   <!-- Main styles for this application -->
   <link href="/public/backend/css/style.css" rel="stylesheet">
+  <link href="/public/backend/css/custom.css" rel="stylesheet">
   <!-- Styles required by this views -->
   {{ block('afterStyles')}}
+  <meta name="base_url" content="{{base_url()}}" />
 
 </head>
 
@@ -54,6 +56,7 @@
   {{ block('beforeScripts')}}
   <!-- Bootstrap and necessary plugins -->
   <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.1/parsley.min.js"></script>
   <script src="/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/node_modules/pace-progress/pace.min.js"></script>
@@ -62,6 +65,7 @@
   <script src="/node_modules/chart.js/dist/Chart.min.js"></script>
 
   <!-- CoreUI main scripts -->
+  <script src="/public/backend/js/global.js"></script>
   <script src="/public/backend/js/app.js"></script>
 
   <!-- Plugins and scripts required by this views -->
