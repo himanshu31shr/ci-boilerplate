@@ -31,26 +31,55 @@ class Model extends Command
 	        $output->writeln("<error>".$this->error."</error>");
     	} else {
 	        $this->createController();
+            // passthru($this->serverCommand());
 	        $output->writeln("<info>'$this->name' model created successfully!</info>");
     	}
     }
 
-    protected function createController(){
+    protected function resolvePath($path, $html){
+        $prev_path = 'application/models/';
+        if(strpos($path, '/')) {
+            $folder = explode('/', $path);
 
+            for ($i=0; $i < count($folder) ; $i++) { 
+                if($i == count($folder)-1) {
+                    return file_put_contents($prev_path.ucwords($folder[$i]).'.php', trim($html));
+                } else {
+                    $prev_path = $prev_path.$folder[$i].'/';
+                    if(!file_exists($prev_path)) {
+                        mkdir($prev_path);
+                    }
+                }
+            }
+        } else {
+            return file_put_contents($prev_path.ucwords($path).'.php', trim($html));
+        }
+    }
+
+    protected function serverCommand(){
+        return sprintf('%s %s',
+            'composer',
+            'dump-autoload'
+        );
+    }
+
+    protected function createController(){
+        $folder = explode('/', $this->name);
     	$html = '
 <?php 
 defined(\'BASEPATH\') OR exit(\'No direct script access allowed\');
 
-class '.$this->name.' extends '.$this->parent.' {
+class '.ucwords($folder[count($folder)-1]).' extends '.$this->parent.' {
 
-    protected $table = \''.strtolower($this->name).'\';
+    protected $table = \''.strtolower($folder[count($folder)-1]).'\';
 
     public function __construct(){
         parent::__construct();
     }
 	
 }';
-		return file_put_contents('application/models/'.$this->name.'.php', trim($html));
+        $this->resolvePath($this->name, $html);
+        return $this->serverCommand();
     }
 
     private function _check_class(){

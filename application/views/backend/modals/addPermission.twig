@@ -1,0 +1,19 @@
+{% extends 'backend/modals/layout/modal.layout.twig' %}
+{% block header %}
+Add new permission 
+{% endblock %}
+{% block body %}
+	<form class="ajax-submit" action="admin/save_permission" novalidate>
+		<div class="row">
+		  	<div class="col-12">
+				<div class="row">
+			  		<div class="form-group col">
+			  			<label>Permission name</label>
+			  			<input class="form-control" data-parsley-required name="name" placeholder="Enter permission name.." type="text">
+			  		</div>
+			  	</div>
+			  	<button class="btn btn-primary"> Save</button>
+		  	</div>
+	  	</div>
+  	</form>
+{% endblock %}

@@ -7,7 +7,6 @@ class Home extends GuestController {
 	}
 
 	public function index(){
-		$this->load->model('Test');
-		echo $this->twig->display('backend/dashboard');	
+		$this->twig->display('backend/dashboard');	
 	}
 }

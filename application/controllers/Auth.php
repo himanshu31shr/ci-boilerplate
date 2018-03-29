@@ -24,6 +24,16 @@ class Auth extends GuestController
 	}
 
 	public function forgot_password(){
+		
+	}
 
+	public function grantRequest(){
+		$data = $this->input->post();
+		if($this->aauth->login($data['username'], $data['password'])){
+			redirect('admin');
+		} else {
+			show_error($this->aauth->get_errors_array()[0], 1, 500, 500);
+		}
 	}
 }
+	
