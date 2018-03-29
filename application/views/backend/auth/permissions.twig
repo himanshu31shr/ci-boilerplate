@@ -1,0 +1,32 @@
+{% extends 'backend/layout/app.layout.twig' %}
+{% block body %}
+    
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-body">
+      <h3>All permissions <button class="btn btn-primary btn-sm pull-right open-modal" data-url="admin/add_permission/addPermission"><i class="fa fa-plus"></i> Add Permission</button></h3>
+       <div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<td>#</td>
+						<td>Name</td>
+					</tr>
+				</thead>
+				<tbody>
+				<pre>
+					{% if permissions is defined and permissions is not empty %}
+						{% for permission in permissions %}
+							<tr>
+								<td>{{permission.id}}</td>
+								<td>{{permission.name}}</td>
+							</tr>
+						{% endfor %}
+					{% endif %}
+				</tbody>
+			</table>
+       </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

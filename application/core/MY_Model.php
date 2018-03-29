@@ -18,6 +18,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *------------------------------------------------------------------------------------------------------------------*/
 use \Illuminate\Database\Eloquent\Model as Eloquent;
 
-abstract class MY_Model extends Eloquent {
-	
-}
+abstract class MY_Model extends Eloquent {}

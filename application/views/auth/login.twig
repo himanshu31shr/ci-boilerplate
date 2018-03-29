@@ -7,26 +7,28 @@
           <div class="card-body">
             <h1>Login</h1>
             <p class="text-muted">Sign In to your account</p>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="icon-user"></i></span>
+            <form action="auth/grantRequest" class="ajax-submit">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="icon-user"></i></span>
+                </div>
+                <input data-parsley-required type="text" name="username" class="form-control" placeholder="Username">
               </div>
-              <input type="text" class="form-control" placeholder="Username">
-            </div>
-            <div class="input-group mb-4">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="icon-lock"></i></span>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="icon-lock"></i></span>
+                </div>
+                <input data-parsley-required type="password" name="password" class="form-control" placeholder="Password">
               </div>
-              <input type="password" class="form-control" placeholder="Password">
-            </div>
-            <div class="row">
-              <div class="col-6">
-                <button type="button" class="btn btn-primary px-4">Login</button>
+              <div class="row">
+                <div class="col-6">
+                  <button type="submit" class="btn btn-primary px-4">Login</button>
+                </div>
+                <div class="col-6 text-right">
+                  <button type="button" class="btn btn-link px-0">Forgot password?</button>
+                </div>
               </div>
-              <div class="col-6 text-right">
-                <button type="button" class="btn btn-link px-0">Forgot password?</button>
-              </div>
-            </div>
+            </form>
           </div>
         </div>
         <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">

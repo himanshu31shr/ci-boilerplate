@@ -33,6 +33,7 @@ var Modal = (function(){
 				Modal.close();
 				$('body').append(response.modal);
 				$('#myModal').modal();
+				Request.events();
 			} else {
 				// toastr.error('Error opening popup!');
 			}
@@ -46,7 +47,7 @@ var Modal = (function(){
 
 	return $lmodal;
 
-})(window, Request);
+})();
 
 var Request = (function(w, u, $, l, m){
 
@@ -66,7 +67,12 @@ var Request = (function(w, u, $, l, m){
 			},
 			complete:function(){
 				l.hide();
-			}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+                if(typeof(jqXHR.responseJSON) != 'undefined') {
+		            toastr.error(jqXHR.responseJSON.message);
+				}
+            }
 		});
 	};
 
@@ -83,16 +89,26 @@ var Request = (function(w, u, $, l, m){
 				l.show();
 			},
 			success:function(response){
-				console.log(response);
+				if(response.status == false) {
+					toastr.error(response.message);
+				} else {
+					toastr.success(response.message);
+				}
 			},
 			complete:function(){
 				l.hide();
-			}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				if(typeof(jqXHR.responseJSON) != 'undefined') {
+		            toastr.error(jqXHR.responseJSON.message);
+				}
+            }
 		});
 	};
 
 	$lrequest.events = function(){
 		$('form.ajax-submit').unbind().on('submit', function(e){
+			e.preventDefault();
 
 			var validated = true;
 
@@ -103,11 +119,12 @@ var Request = (function(w, u, $, l, m){
 				return false;
 			}
 
-			e.preventDefault();
 			var formdata = new FormData($(this)[0]);
 
 			Request.post($(this).attr('action'), formdata).then(function(response){
-				console.log(response);
+				if(typeof(response.goto) != 'undefined') {
+					window.location.replace(response.goto);
+				}
 			});
 		});
 
@@ -115,12 +132,17 @@ var Request = (function(w, u, $, l, m){
 			e.preventDefault();
 			m.open($(this).attr('data-url'));
 		});
+
+		$('.change-status').unbind().on('click', function(e){
+			Request.get($(this).attr('data-url')).then(function(response){
+				if(typeof(response.goto) != 'undefined') {
+					window.location.replace(response.goto);
+				}
+			});
+		});
 	}
 
 	return $lrequest;
 
 })(window, Url, $, Loader, Modal);
-
-
-
 Request.events();

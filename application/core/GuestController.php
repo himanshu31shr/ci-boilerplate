@@ -6,6 +6,10 @@ class GuestController extends MY_Controller{
 		parent::__construct();
 	}
 
+	protected function modal($view, $options = nul){
+		
+	}
+
 	protected function setAuth(){
 		# Do nothing here
 	}

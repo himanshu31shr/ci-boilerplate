@@ -19,9 +19,11 @@ abstract class MY_Controller extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
 
+		$this->setAuth();
 		$this->data['title'] = APP_NAME;				
 		$this->load->library('session');
 		$this->setTwigConfig();
+
 	}
 
 	private function setTwigConfig(){
@@ -31,6 +33,7 @@ abstract class MY_Controller extends CI_Controller{
 
 		$this->load->library('twig', $this->_twigConfig);
 		$this->twig->addGlobal('session', $this->session);
+		$this->twig->addGlobal('user', $this->aauth->get_user());
 	}
 
 	public function __call($method, $params){
@@ -69,24 +72,7 @@ abstract class MY_Controller extends CI_Controller{
         }
 	}
 
-	// protected function setBreadCrumbs($crumbs){
-
-	// 	if(!is_array($crumbs)) {
-	// 		$this->data['breadcrumbs'][$crumbs] = $crumbs;
-	// 	} else {
-	// 		$this->data['breadcrumbs'] += $crumbs;
-	// 	}
-
-	// 	$this->twig->addGlobal('data', $this->data);
-	// 	// $this->data['breadcrumbs'] = $inject_crumbs;
-	// }
-
-	// protected function setTitle($title){
-	// 	$this->data['title'] = $title.' - '.APP_NAME;
-	// 	$this->twig->addGlobal('data', $this->data);
-	// }
-
-	// protected  
+	abstract protected function modal($view, $options = null);
 
 	abstract protected function setAuth();
 }

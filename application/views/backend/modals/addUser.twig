@@ -1,0 +1,64 @@
+{% extends 'backend/modals/layout/modal.layout.twig' %}
+{% block header %}
+ {{user is not defined ? 'Add new user' : 'Edit User'}} 
+{% endblock %}
+{% block body %}
+	<form class="ajax-submit" action="admin/{{user is defined ? 'update_user' : 'save_user'}}/{{user is defined	 ? user.id : ''}}" novalidate>
+		<div class="row">
+			<div class="col-4">
+			  	<div class="form-group">
+			  		<label for="company">First Name</label>
+			  		<input class="form-control" name="first_name" data-parsley-required placeholder="Enter first name.." type="text" value="{{user.variables.first_name is defined ? user.variables.first_name : ''}}">
+			  	</div>
+		  	</div>
+		  	<div class="col-4">
+			  	<div class="form-group">
+			  		<label for="vat">Middle Name</label>
+			  		<input class="form-control" name="middle_name" placeholder="Enter middle name.." type="text" value="{{user.variables.middle_name is defined ? user.variables.middle_name : ''}}">
+			  	</div>
+		  	</div>
+		  	<div class="col-4">
+			  	<div class="form-group">
+			  		<label for="street">Last name</label>
+			  		<input class="form-control" name="last_name" data-parsley-required placeholder="Enter last name.." type="text" value="{{user.variables.last_name is defined ? user.variables.last_name : ''}}">
+			  	</div>
+		  	</div>
+		  	<div class="col">
+			  	<div class="row">
+			  		<div class="form-group col">
+			  			<label for="city">Email</label>
+			  			<input class="form-control" name="email" data-parsley-required placeholder="Enter email.." type="text" data-parsley-type="email" value="{{user.email is defined ? user.email : ''}}">
+			  		</div>
+			  		<div class="form-group col">
+			  			<label for="postal-code">Phone</label>
+			  			<input class="form-control" name="phone" placeholder="Enter phone.." type="text" value="{{user.variables.phone is defined ? user.variables.phone : ''}}">
+			  		</div>
+			  	</div>
+
+			  	<div class="form-group">
+			  		<label for="country">User Group</label>
+			  		<select class="form-control" name="group[]" data-parsley-required multiple >
+			  			<option>Select user group</option>
+			  			{% set selected_groups = user.groups %}
+						{% for group in groups %}
+							<option value="{{group.id}}" {{ group.name in user.group ? 'selected="selected"' : ''}}>{{group.name}}</option>
+						{% endfor %}
+					</select>
+			  	</div>
+		  	</div>	
+		  	<div class="col-12">
+				<div class="row">
+			  		<div class="form-group col">
+			  			<label for="city">Password</label>
+			  			<input class="form-control" name="password" id="password" {{user is defined ? '' : 'data-parsley-required' }} placeholder="Enter password.." type="password">
+			  		</div>
+			  		<div class="form-group col">
+			  			<label for="postal-code">Repeat Password</label>
+			  			<input class="form-control" name="repeat_password" data-parsley-equalto="#password" {{user is defined ? '' : 'data-parsley-required' }} placeholder="Repeat password.." type="password">
+			  		</div>
+			  	</div>
+			  	<button class="btn btn-primary"> Save</button>
+		  	</div>
+	  	</div>
+  	</form>
+{% endblock %}
