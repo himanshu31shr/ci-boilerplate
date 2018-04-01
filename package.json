@@ -4,7 +4,14 @@
   "description": "A kickstart boilerplate.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "npm run development -- --watch",
+    "watch-poll": "npm run watch -- --watch-poll",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "test": "cross-env NODE_ENV=test jest"
   },
   "repository": {
     "type": "git",
@@ -27,17 +34,11 @@
     "chart.js": "2.7.1",
     "datatables.net": "^1.10.16",
     "datatables.net-dt": "^1.10.16",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "flag-icon-css": "2.9.0",
     "font-awesome": "4.7.0",
-    "grunt": "~0.4.1",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-copy": "~0.5.0",
-    "grunt-contrib-cssmin": "~0.7.0",
-    "grunt-contrib-uglify": "~0.2.7",
-    "grunt-rev": "~0.1.0",
-    "grunt-usemin": "~2.0.2",
     "jquery": "3.2.1",
+    "pace": "0.0.4",
     "pace-progress": "1.0.2",
     "parsleyjs": "^2.8.1",
     "popper.js": "1.12.9",
@@ -45,13 +46,9 @@
     "toastr": "^2.1.4"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-uglify": "~0.2.7",
-    "grunt-contrib-cssmin": "~0.7.0",
-    "grunt-usemin": "~2.0.2",
-    "grunt-contrib-copy": "~0.5.0",
-    "grunt-rev": "~0.1.0",
-    "grunt-contrib-clean": "~0.5.0"
+    "cross-env": "^5.1",
+    "laravel-mix": "^2.1.11",
+    "webpack": "^3.0",
+    "webpack-cli": "^2.0.13"
   }
 }

@@ -1,5 +1,16 @@
 <?php
-
+/*----------------------------------------------------------------------------------------------------------------------------------
+ |
+ |	ADMIN CONTROLLER
+ |
+ |----------------------------------------------------------------------------------------------------------------------------------
+ |
+ |  Houses common functions for admin module.
+ |
+ |	@author Himanshu Shrivastava <himanshu31shr@gmail.com>
+ |	@package CI-Boilerplate
+ |
+ */
 class Admin extends AdminController {
 	
 	function __construct()
@@ -8,6 +19,10 @@ class Admin extends AdminController {
 		$this->load->model('User/Users');
 	}
 
+	/**
+	 * Dashboard page
+	 * @return view
+	 */
 	public function index(){
 		$this->setBreadCrumbs([
 				'home' => '', 
@@ -20,6 +35,12 @@ class Admin extends AdminController {
 			->twig->display('backend/dashboard');
 	}
 
+	/**
+	 * Modal view for adding a new user
+	 * 
+	 * @param string 	$view   View name 
+	 * @param int 		$option User id 
+	 */
 	public function add_user($view, $option = null){
 
 		$this->_modal_data = [
@@ -28,8 +49,6 @@ class Admin extends AdminController {
 		
 		if($option != null) {
 			$user = Users::where('id', $option)->first();
-			// echo '<pre>';
-			// print_r($user->variables);die;
 			if(!$user) {
 				show_error('No such user is present!');
 			}
@@ -40,7 +59,13 @@ class Admin extends AdminController {
 		
 		$this->modal($view, $option);
 	}
-
+ 
+	/**
+	 * Changes status of a user provided id.
+	 * 
+	 * @param  int $id [description]
+	 * @return json
+	 */
 	function change_user_status($id) {
 		if($this->aauth->is_banned($id)) {
 			$this->aauth->unban_user($id);
@@ -55,6 +80,10 @@ class Admin extends AdminController {
 		]);
 	}
 
+	/**
+	 * Lists all users.
+	 * @return view
+	 */
 	public function users(){
 
 		$inject = [
@@ -69,6 +98,12 @@ class Admin extends AdminController {
 			->twig->display('backend/users', $inject);
 	}
 
+	/**
+	 * Updates user details.
+	 * 
+	 * @param  int $id 	User id
+	 * @return json
+	 */
 	public function update_user($id){
 		$data = $this->input->post();
 	
@@ -101,6 +136,10 @@ class Admin extends AdminController {
 		]);
 	}
 
+	/**
+	 * Adds a new user
+	 * @return json
+	 */
 	public function save_user(){
 		$data = $this->input->post();
 
@@ -128,6 +167,10 @@ class Admin extends AdminController {
 		]);
 	}
 
+	/**
+	 * Lists all groups
+	 * @return view
+	 */
 	public function groups(){
 
 		$inject = [
@@ -142,6 +185,11 @@ class Admin extends AdminController {
 			->twig->display('backend/auth/groups', $inject);
 	}
 
+	/**
+	 * Model view for adding a new group
+	 * @param string $view   name of the modal view
+	 * @param int $option    group id
+	 */
 	public function add_group($view, $option = null){
 		$this->_modal_data['permissions'] = $this->aauth->list_perms();
 
@@ -156,6 +204,11 @@ class Admin extends AdminController {
 		$this->modal($view);
 	}
 
+	/**
+	 * Adds a new group
+	 * 
+	 * @return json
+	 */
 	public function save_group(){
 		$data = $this->input->post();
 
@@ -176,6 +229,11 @@ class Admin extends AdminController {
 		]);
 	}
 
+	/**
+	 * Updates existing group
+	 * @param  int $id Group id
+	 * @return json
+	 */
 	public function update_group($id){
 		$data = $this->input->post();
 		$this->aauth->update_group($id, $data['name']);
@@ -198,11 +256,14 @@ class Admin extends AdminController {
 		]);
 	}
 
+	/**
+	 * Lists all permissions
+	 * @return view
+	 */
 	public function permissions(){
 		$inject = [
 			'permissions' => $this->aauth->list_perms()
 		];
-
 
 		$this->setBreadCrumbs([
 				'home' => '', 
@@ -212,10 +273,18 @@ class Admin extends AdminController {
 			->twig->display('backend/auth/permissions', $inject);
 	}
 
+	/**
+	 * Modal view for adding a new permission
+	 * @param string $view view name
+	 */
 	public function add_permission($view){
 		$this->modal($view);
 	}
 
+	/**
+	 * Adds a new permission
+	 * @return view
+	 */
 	public function save_permission(){
 		$data = $this->input->post();
 
@@ -228,5 +297,19 @@ class Admin extends AdminController {
 			'message' => 'Permission created successfully!',
 			'goto' => base_url('admin/permissions')
 		]);
+	}
+
+	/**
+	 * Returns profile view for logged user
+	 * @return view
+	 */
+	public function profile() {
+		$user_id = $this->aauth->get_user()->id;
+
+		$this->data['user'] = Users::where('id', $user_id)->first();
+		$this->data['groups'] = $this->aauth->list_groups();
+		$this->data['group'] = $user_id;
+
+		$this->twig->display('backend/profile', $this->data);
 	}
 }

@@ -1,4 +1,18 @@
 <?php 
+/*--------------------------------------------------------------------------------------------------------------------------
+|
+|	CUSTOM EXCEPTION CLASS
+|
+|---------------------------------------------------------------------------------------------------------------------------
+|
+|	Core classes for global exception handling.
+|	Support response in json and/or html according to the request type
+|
+|	@author Himanshu Shrivastava <himanshu31shr@gmail.com>
+|	@package CI-Boilerplate
+|
+*/
+
 class MY_Exceptions extends CI_Exceptions {
 
 	private $CI;

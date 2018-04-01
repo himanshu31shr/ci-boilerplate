@@ -113,8 +113,12 @@ var Request = (function(w, u, $, l, m){
 			var validated = true;
 
 			if(!$(this).parsley({
-				errorsWrapper: '<p class="text-danger parsley-error-list"></p>',
-				errorTemplate: '<p class="parsley-error"></p>'
+				errorsContainer: function (ParsleyField) {
+					return ParsleyField.$element.closest('div');
+
+				},
+				errorsWrapper: '<div class="text-danger parsley-error-list col-12 mt-2 mb-0"></div>',
+				errorTemplate: '<p class="parsley-error m-0"></p>'
 			}).validate()){
 				return false;
 			}

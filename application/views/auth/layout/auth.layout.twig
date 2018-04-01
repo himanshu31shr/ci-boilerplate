@@ -16,6 +16,7 @@
   
   <!-- Main styles for this application -->
   <link href="/public/backend/css/style.css" rel="stylesheet">
+  <link href="/public/backend/css/custom.css" rel="stylesheet">
 
   <!-- Styles required by this views -->
 
@@ -24,6 +25,8 @@
 <body class="app flex-row align-items-center">
   <div class="container">
     {% include 'partials/error.twig' %}
+    {% include 'partials/success.twig' %}
+
     {{ block('body') }}
   </div>
   <!-- Bootstrap and necessary plugins -->
