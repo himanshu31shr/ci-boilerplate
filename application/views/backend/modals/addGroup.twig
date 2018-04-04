@@ -1,0 +1,28 @@
+{% extends 'backend/modals/layout/modal.layout.twig' %}
+{% block header %}
+{{ group is not empty ? 'Edit group' : 'Add new group' }}
+{% endblock %}
+{% block body %}
+	<form class="ajax-submit" action="admin/{{group is defined ? 'update_group' : 'save_group'}}/{{group is defined ? group : ''}}" novalidate>
+		<div class="row">
+		  	<div class="col-12">
+				<div class="row">
+			  		<div class="form-group col">
+			  			<label>Group name</label>
+			  			<input class="form-control" data-parsley-required name="name" placeholder="Enter group name.." type="text" value="{{group is defined ? group : ''}}">
+			  		</div>
+			  	</div>
+			  	<div class="row m-2">
+			  		{% for permission in permissions %}
+			  			<div class="col-4">
+					  		<div class="form-check form-check-inline mr-1">
+								<label class="form-check-label"> <input class="form-check-input" type="checkbox" name="permission[]"  value="{{permission.id}}" {{permission.id in allowed_perms ? 'checked="checked"' : ''}}>{{permission.name}} </label>
+							</div>
+						</div>
+			  		{% endfor %}
+			  	</div>
+			  	<button class="btn btn-primary"> Save</button>
+		  	</div>
+	  	</div>
+  	</form>
+{% endblock %}

@@ -8,5 +8,8 @@ $application = new Application();
 
 # add our commands
 $application->add(new Server());
+$application->add(new Controller());
+$application->add(new Model());
+
 
 $application->run();

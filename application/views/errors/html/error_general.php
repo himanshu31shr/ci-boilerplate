@@ -1,64 +1,61 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
+?>
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8">
-<title>Error</title>
-<style type="text/css">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="CoreUI Bootstrap 4 Admin Template">
+	<meta name="author" content="Lukasz Holeczek">
+	<meta name="keyword" content="CoreUI Bootstrap 4 Admin Template">
 
-::selection { background-color: #E13300; color: white; }
-::-moz-selection { background-color: #E13300; color: white; }
+	<title><?php echo $heading; ?></title>
 
-body {
-	background-color: #fff;
-	margin: 40px;
-	font: 13px/20px normal Helvetica, Arial, sans-serif;
-	color: #4F5155;
-}
+	<link href="/node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+  	<link href="/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	  <link href="/node_modules/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+	  <link href="/node_modules/toastr/build/toastr.min.css" rel="stylesheet">
 
-a {
-	color: #003399;
-	background-color: transparent;
-	font-weight: normal;
-}
+	  <!-- Main styles for this application -->
+	  <link href="/public/backend/css/style.css" rel="stylesheet">
+	  <link href="/public/backend/css/custom.css" rel="stylesheet">
+	  <!-- Styles required by this views -->
 
-h1 {
-	color: #444;
-	background-color: transparent;
-	border-bottom: 1px solid #D0D0D0;
-	font-size: 19px;
-	font-weight: normal;
-	margin: 0 0 14px 0;
-	padding: 14px 15px 10px 15px;
-}
-
-code {
-	font-family: Consolas, Monaco, Courier New, Courier, monospace;
-	font-size: 12px;
-	background-color: #f9f9f9;
-	border: 1px solid #D0D0D0;
-	color: #002166;
-	display: block;
-	margin: 14px 0 14px 0;
-	padding: 12px 10px 12px 10px;
-}
-
-#container {
-	margin: 10px;
-	border: 1px solid #D0D0D0;
-	box-shadow: 0 0 8px #D0D0D0;
-}
-
-p {
-	margin: 12px 15px 12px 15px;
-}
-</style>
+	<link href="css/style.css" rel="stylesheet">
 </head>
-<body>
-	<div id="container">
-		<h1><?php echo $heading; ?></h1>
-		<?php echo $message; ?>
+<body class="app flex-row align-items-center">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="clearfix">
+					<h1 class="float-left display-3 mr-4"><?php echo $heading; ?></h1>
+					<h4 class="pt-3">Oops! You're lost.</h4>
+					<p class="text-muted"><?php echo $message; ?></p>
+				</div>
+			</div>
+		</div>
 	</div>
+</div>
+
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.1/parsley.min.js"></script>
+  <script src="/node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/node_modules/pace-progress/pace.min.js"></script>
+  <script src="/node_modules/toastr/build/toastr.min.js"></script>
+
+  <!-- Plugins and scripts required by all views -->
+  <script src="/node_modules/chart.js/dist/Chart.min.js"></script>
+
+  <!-- CoreUI main scripts -->
+  <script src="/public/backend/js/global.js"></script>
+  <script src="/public/backend/js/app.js"></script>
+
+  <!-- Plugins and scripts required by this views -->
+  <!-- Custom scripts required by this view -->
+  <script src="/public/backend//public/backend/js/views/main.js"></script>
+
 </body>
 </html>

@@ -1,0 +1,36 @@
+{% extends 'backend/layout/app.layout.twig' %}
+{% block body %}
+    
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-body">
+      <h3>All Groups <button class="btn btn-primary btn-sm pull-right open-modal" data-url="admin/add_group/addGroup"><i class="fa fa-plus"></i> Add Group</button></h3>
+       <div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<td>#</td>
+						<td>Name</td>
+						<td>Action</td>
+					</tr>
+				</thead>
+				<tbody>
+				<pre>
+					{% if groups is defined and groups is not empty %}
+						{% for group in groups %}
+							<tr>
+								<td>{{group.id}}</td>
+								<td>{{group.name}}</td>
+								<td>
+									<button class="btn btn-info btn-sm open-modal" data-url="admin/add_group/addGroup/{{group.id}}"><i class="fa fa-edit"></i> Edit</button>
+								</td>
+							</tr>
+						{% endfor %}
+					{% endif %}
+				</tbody>
+			</table>
+       </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

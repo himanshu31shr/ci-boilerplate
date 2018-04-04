@@ -1,0 +1,8 @@
+{% if data['success'] is defined %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+	<strong><i class="fa fa-check-circle"></i> {{data['success']['type']}}: </strong> {{data['success']['message']}}
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">×</span>
+	</button>
+</div>
+{% endif %}

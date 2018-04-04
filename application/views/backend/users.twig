@@ -1,0 +1,50 @@
+{% extends 'backend/layout/app.layout.twig' %}
+{% block body %}
+    
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-body">
+      <h3>All users <button class="btn btn-primary btn-sm pull-right open-modal" data-url="admin/add_user/addUser"><i class="fa fa-plus"></i> Add User</button></h3>
+       <div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<td>#</td>
+						<td>Name</td>
+						<td>Email</td>
+						<td>Group</td>
+						<td>Action</td>
+					</tr>
+				</thead>
+				<tbody>
+				<pre>
+					{% if users is defined and users is not empty %}
+						{% for user in users %}
+							<tr>
+								<td>{{user.id}}</td>
+								<td>{{user.full_name}}</td>
+								<td>{{user.email}}</td>
+								<td>
+								{% if user.group is not empty %}
+									{% for group in user.group %}
+										<span class="badge badge-primary">{{group}}</span>
+									{% endfor %}
+								{% endif %}
+								</td>
+								<td>
+									<div class="btn-group">
+										<!-- <button class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> View</button> -->
+										<button class="btn btn-danger btn-sm change-status" data-url="admin/change_user_status/{{user.id}}"><i class="fa fa-eye"></i> {{user.banned == 0 ? 'Deactivate' : 'Activate'}}</button>
+										<button class="btn btn-info btn-sm open-modal" data-url="admin/add_user/addUser/{{user.id}}"><i class="fa fa-edit"></i> Edit</button>
+									</div>
+								</td>
+							</tr>
+						{% endfor %}
+					{% endif %}
+				</tbody>
+			</table>
+       </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

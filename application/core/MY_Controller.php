@@ -1,13 +1,15 @@
 <?php
 /*--------------------------------------------------------------------------------------------------------------------------
 |
-|	CORE CLASSES
+|	CORE CLASS
 |
 |---------------------------------------------------------------------------------------------------------------------------
 |
 |	Core classes for global data injection and/or managing 
-|	user authentication
+|	user authentication, twig and other configuration
 |
+|	@author Himanshu Shrivastava <himanshu31shr@gmail.com>
+|	@package CI-Boilerplate
 *--------------------------------*/
 
 abstract class MY_Controller extends CI_Controller{
@@ -19,20 +21,33 @@ abstract class MY_Controller extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
 
+		$this->setAuth();
 		$this->data['title'] = APP_NAME;				
 		$this->load->library('session');
 		$this->setTwigConfig();
 	}
 
-	private function setTwigConfig(){
+	/**
+	 * Sets twig configuration
+	 */
+	protected function setTwigConfig(){
 		$this->_twigConfig = [
 			'functions' => ['twig_helper']
 		];
 
 		$this->load->library('twig', $this->_twigConfig);
 		$this->twig->addGlobal('session', $this->session);
+		$this->twig->addGlobal('user', $this->aauth->get_user());
 	}
 
+	/**
+	 * Inverts undefined methods and binds data with the 
+	 * caller name to twig views as global variables.
+	 *  
+	 * @param  string $method 
+	 * @param  array $params 
+	 * @return object
+	 */
 	public function __call($method, $params){
 		if(strpos($method, 'set') !== false) {
 			$inject_params = [];
@@ -46,85 +61,24 @@ abstract class MY_Controller extends CI_Controller{
 
     		$this->data[str_replace('set', '', strtolower($method))] = $inject_params; 
 			$this->twig->addGlobal('data', $this->data);
-    	}
+    	} else {
+			return call_user_func_array([$this, $method], $params);
+        }
 
     	return $this;
 	}
-	
-	public function _remap($method, $params = array())
-	{
-        if (!method_exists($this, $method)) {
-        	if(strpos($method, 'set') !== false) {
-        		$this->data[str_replace('set', '', strtolower($method))] = $params; 
-				$this->twig->addGlobal('data', $this->data);
 
-        	} else {
-	        	$this->data['error'] = ['type' => 'Route exception', 'message' => 'Page doesn\'t exists!'];    		
-				$this->twig->addGlobal('data', $this->data);
-				return call_user_func_array([$this, 'index'], $params);
-        	}
+	/**
+	 * Returns modal view, provided view name.
+	 * 
+	 * @param  string 		$view    View name
+	 * @param  string|int 	$options Optional argument for passing config var
+	 * @return json
+	 */
+	abstract protected function modal($view, $options = null);
 
-        } else{
-			return call_user_func_array([$this, $method], $params);
-        }
-	}
-
-	// protected function setBreadCrumbs($crumbs){
-
-	// 	if(!is_array($crumbs)) {
-	// 		$this->data['breadcrumbs'][$crumbs] = $crumbs;
-	// 	} else {
-	// 		$this->data['breadcrumbs'] += $crumbs;
-	// 	}
-
-	// 	$this->twig->addGlobal('data', $this->data);
-	// 	// $this->data['breadcrumbs'] = $inject_crumbs;
-	// }
-
-	// protected function setTitle($title){
-	// 	$this->data['title'] = $title.' - '.APP_NAME;
-	// 	$this->twig->addGlobal('data', $this->data);
-	// }
-
-	// protected  
-
+	/**
+	 * Checks logged user
+	 */
 	abstract protected function setAuth();
-}
-
-class AdminController extends MY_Controller
-{
-	
-	function __construct()
-	{
-		parent::__construct();
-	}
-
-	protected function setAuth(){
-
-	}
-}
-
-class UserController extends MY_Controller
-{
-	
-	function __construct()
-	{
-		parent::__construct();
-	}
-
-	protected function setAuth(){
-
-	}
-}
-
-class GuestController extends MY_Controller{
-	
-	function __construct()
-	{
-		parent::__construct();
-	}
-
-	protected function setAuth(){
-		# Do nothing here
-	}
 }

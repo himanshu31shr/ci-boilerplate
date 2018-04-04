@@ -1,0 +1,95 @@
+{% extends 'backend/layout/app.layout.twig' %}
+{% block body %}
+    
+<div class="container-fluid">
+	<div class="animated fadeIn">
+		<div class="row">
+			<div class="col-md-12 mb-4">
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="nav-item">
+					<a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-controls="home">Personal Details</a>
+					</li>
+					<!-- <li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-controls="profile">Change Password</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#messages" role="tab" aria-controls="messages">Messages</a>
+					</li> -->
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="home" role="tabpanel">
+						<form class="ajax-submit" action="admin/{{user is defined ? 'update_user' : 'save_user'}}/{{user is defined	 ? user.id : ''}}" novalidate>
+						<div class="row">
+							<div class="col-4">
+							  	<div class="form-group">
+							  		<label for="company">First Name</label>
+							  		<input class="form-control" name="first_name" data-parsley-required placeholder="Enter first name.." type="text" value="{{user.variables.first_name is defined ? user.variables.first_name : ''}}">
+							  	</div>
+						  	</div>
+						  	<div class="col-4">
+							  	<div class="form-group">
+							  		<label for="vat">Middle Name</label>
+							  		<input class="form-control" name="middle_name" placeholder="Enter middle name.." type="text" value="{{user.variables.middle_name is defined ? user.variables.middle_name : ''}}">
+							  	</div>
+						  	</div>
+						  	<div class="col-4">
+							  	<div class="form-group">
+							  		<label for="street">Last name</label>
+							  		<input class="form-control" name="last_name" data-parsley-required placeholder="Enter last name.." type="text" value="{{user.variables.last_name is defined ? user.variables.last_name : ''}}">
+							  	</div>
+						  	</div>
+						  	<div class="col">
+							  	<div class="row">
+							  		<div class="form-group col">
+							  			<label for="city">Email</label>
+							  			<input disabled="" class="form-control" name="email" data-parsley-required placeholder="Enter email.." type="text" data-parsley-type="email" value="{{user.email is defined ? user.email : ''}}">
+							  		</div>
+							  		<div class="form-group col">
+							  			<label for="postal-code">Phone</label>
+							  			<input class="form-control" name="phone" placeholder="Enter phone.." type="text" value="{{user.variables.phone is defined ? user.variables.phone : ''}}">
+							  		</div>
+							  	</div>
+
+							  	<div class="form-group">
+							  		<label for="country">User Group</label>
+							  		<select class="form-control" name="group[]" data-parsley-required multiple >
+							  			<option>Select user group</option>
+							  			{% set selected_groups = user.groups %}
+										{% for group in groups %}
+											<option value="{{group.id}}" {{ group.name in user.group ? 'selected="selected"' : ''}}>{{group.name}}</option>
+										{% endfor %}
+									</select>
+							  	</div>
+						  	</div>	
+						  	<div class="col-12">
+								<div class="row">
+							  		<div class="form-group col">
+							  			<label for="city">Password</label>
+							  			<input class="form-control" name="password" id="password" {{user is defined ? '' : 'data-parsley-required' }} placeholder="Enter password.." type="password">
+							  		</div>
+							  		<div class="form-group col">
+							  			<label for="postal-code">Repeat Password</label>
+							  			<input class="form-control" name="repeat_password" data-parsley-equalto="#password" {{user is defined ? '' : 'data-parsley-required' }} placeholder="Repeat password.." type="password">
+							  		</div>
+							  	</div>
+							  	<button class="btn btn-primary"> Save</button>
+						  	</div>
+					  	</div>
+				  	</form>
+					</div>
+					<!-- <div class="tab-pane" id="profile" role="tabpanel">
+						2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+						dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</div>
+					<div class="tab-pane" id="messages" role="tabpanel">
+						3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+						dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</div> -->
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+{% endblock %}
