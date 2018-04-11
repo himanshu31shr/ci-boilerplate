@@ -1,6 +1,6 @@
 {
 	"description": "A simple codeigniter boilerplate",
-	"name": "CodeigniterBoilerplate",
+	"name": "php-ci/Boilerplate",
 	"type": "project",
 	"license": "MIT",
 	"require": {
