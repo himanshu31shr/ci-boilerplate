@@ -10,7 +10,7 @@ env:
   - DB=mysql
 
 script:
-  - php app serve
+  - vendor/bin/phpunit
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
   - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS ci_boilerplate;" -uroot; fi
