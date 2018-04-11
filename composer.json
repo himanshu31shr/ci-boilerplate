@@ -1,6 +1,6 @@
 {
 	"description": "A simple codeigniter boilerplate",
-	"name": "ci-boilerplate",
+	"name": "himanshu31shr/boilerplate",
 	"type": "project",
 	"license": "MIT",
 	"require": {
@@ -10,7 +10,7 @@
 		"illuminate/database": "^5.6"
 	},
 	"suggest": {
-		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
+		"paragonie/random_compat": "Provides better31shrrandomness in PHP 5.x"
 	},
 	"require-dev": {
 		"mikey179/vfsStream": "1.1.*",
