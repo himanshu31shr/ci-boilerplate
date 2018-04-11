@@ -1,0 +1,20 @@
+# see http://about.travis-ci.org/docs/user/languages/php/ for more hints
+language: php
+
+# list any PHP version you want to test against
+php:
+  - 7.1
+
+# optionally specify a list of environments, for example to test different RDBMS
+env:
+  - DB=mysql
+
+
+# execute any number of scripts before the test run, custom env's are available as variables
+before_script:
+  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS ci_boilerplate;" -uroot; fi
+
+before_install:
+  - composer install
+  - npm install
+  - npm run prod
